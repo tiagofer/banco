@@ -2,10 +2,18 @@ package persons;
 
 public class Account {
 	private String numAccount;
-	private double balance;
-	private double limit;
-	private Clients client;
+	private double balance = 0;
+	private double limit = 1000.0;
+	Clients client;
+	private static int totalAccount;
 	
+	public Account(Clients client){
+		this.client = client;	
+		if (client.getPublicEmployer() == 0){
+			limit = 2000.0;
+		}
+		Account.totalAccount++;
+	}
 	
 	public String getNumAccount() {
 		return numAccount;
@@ -20,20 +28,19 @@ public class Account {
 		this.numAccount = numAccount;
 	}
 	public double getBalance() {
-		return balance;
+		return this.balance + this.limit;
 	}
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
-	public double getLimit() {
-		return limit;
-	}
-	public void setLimit(double limit) {
+	public void setLimit(double limit){
 		this.limit = limit;
 	}
+	public static int getTotalAccount(){
+		return Account.totalAccount;
+	}
+	
 	
 	public boolean draw(double value){
-		if(value > this.balance){
+		if(value > (this.balance + this.limit)){
+			System.out.println("Saldo Insuficiente");
 			return false;
 		}else {
 			this.balance -=value;
@@ -41,8 +48,13 @@ public class Account {
 		}
 	}
 	
-	public void deposit(double value){
-		this.balance += value;
+	public boolean deposit(double value){
+		if (value < 0){
+			System.out.println("Deposito Inválido");
+			return false;
+		} 		
+		this.balance += value;	
+		return true;
 	}
 	
 	public boolean transferTo(Account target, double value){
@@ -50,7 +62,7 @@ public class Account {
 			return false;
 		}else {
 			this.balance += value;
-			target.setBalance(getBalance() - value);
+			target.draw(getBalance() - value);
 			return true;
 		}
 	}

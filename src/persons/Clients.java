@@ -5,7 +5,15 @@ public class Clients {
 	private String name;
 	private String surname;
 	private String numberPersonalRecords;
+	private int idade;
+	private int publicEmployer;
 	
+	public int getIdade() {
+		return idade;
+	}
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
 	public String getName() {
 		return name;
 	}
@@ -24,5 +32,10 @@ public class Clients {
 	public void setNumberPersonalRecords(String numberPersonalRecords) {
 		this.numberPersonalRecords = numberPersonalRecords;
 	}
-	
+	public void setPublicEmployer(int publicEmployer){
+		this.publicEmployer = publicEmployer;
+	}
+	public int getPublicEmployer(){
+		return publicEmployer;
+	}
 }
