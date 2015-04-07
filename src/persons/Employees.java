@@ -1,12 +1,12 @@
 package persons;
 
 public class Employees {
-	private String name;
-	private String Department;
-	private String personalRegister;
-	private double salary;
-	private String startDate;
-	private int inCompany;
+	protected String name;
+	protected String Department;
+	protected String personalRegister;
+	protected double salary;
+	protected String startDate;
+	protected int inCompany;
 	
 	public String getStartDate() {
 		return startDate;
@@ -51,5 +51,9 @@ public class Employees {
 	
 	public double returnAnnualSalary(){
 		return this.salary*12;
+	}
+	
+	public double getBonus() {
+		return this.salary * 0.10;
 	}
 }
